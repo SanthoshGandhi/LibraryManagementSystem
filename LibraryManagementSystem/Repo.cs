@@ -101,7 +101,8 @@ namespace LibraryManagementSystem
             con.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.CommandText = "Insert into MemberDetails values ('" + details.MemberID + "','" + details.UserName + "','" + details.Password + "','" + details.Age + "','" + details.Gender + "','" + details.JoinDate + "')";
+            int val = details.ActiveStatus ? 1 : 0;
+            cmd.CommandText = "Insert into MemberDetails values ('" + details.MemberID + "','" + details.UserName + "','" + details.Password + "','" + details.Age + "','" + details.Gender + "','" + details.JoinDate + "','" + val + "')";
             cmd.ExecuteNonQuery();
             con.Close();
         }
@@ -113,7 +114,7 @@ namespace LibraryManagementSystem
             con.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.CommandText = "Delete from MemberDetails where id = '" + ID + "'";
+            cmd.CommandText = "Update MemberDetails set Active = '0' where id = '" + ID + "'";
             cmd.ExecuteNonQuery();
             con.Close();
         }
@@ -148,7 +149,7 @@ namespace LibraryManagementSystem
             SqlDataReader reader = cmd.ExecuteReader();
             while(reader.Read())
             {
-                members.Add(new MemberDetails { MemberID = reader.GetString(0), UserName = reader.GetString(1), Password = reader.GetString(2), Age = reader.GetString(3), Gender = reader.GetString(4), JoinDate = reader.GetDateTime(5) });
+                members.Add(new MemberDetails { MemberID = reader.GetString(0), UserName = reader.GetString(1), Password = reader.GetString(2), Age = reader.GetString(3), Gender = reader.GetString(4), JoinDate = reader.GetDateTime(5),ActiveStatus = reader.GetBoolean(6) });
             }
             con.Close();
             return members;

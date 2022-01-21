@@ -32,11 +32,22 @@ namespace LibraryManagementSystem
         private void xaddbook_Click(object sender, RoutedEventArgs e)
         {
             BookDetails book = new BookDetails();
+            Count = 0;
             Count = repo.Count("BOOK");
             string id = CreateID("BOOK");
             book = new BookDetails { BookID = id, BookTitle = xBookTitle.Text, Description = xDescription.Text, AuthorName = xAuthorname.Text, PublicationYear = Convert.ToInt32(xPublicationdate.Text), Edition = xEdition.Text, BookPrice = Convert.ToInt32(xPrice.Text), BookCount = Convert.ToInt32(xBookCount.Text), EntryDate = DateTime.Today.Date,ActiveStatus = true };
 
+
             repo.InsertBookDetails(book);
+            MessageBox.Show("Successfully Added");
+            xBookTitle.Text = null;
+            xDescription.Text = null;
+            xAuthorname.Text = null;
+            xPublicationdate.Text = null;
+            xEdition.Text = null;
+            xPrice.Text = null;
+            xBookCount.Text = null;
+
         }
 
         private void xinsertbooks_Click(object sender, RoutedEventArgs e)
@@ -72,6 +83,9 @@ namespace LibraryManagementSystem
         private void xBookremove_Click(object sender, RoutedEventArgs e)
         {
             repo.RemoveBook(xbookID.Text);
+            MessageBox.Show("Removed");
+            xbookID.Text = null;
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -87,16 +101,23 @@ namespace LibraryManagementSystem
         private void xaddmember_Click(object sender, RoutedEventArgs e)
         {
             MemberDetails member = new MemberDetails();
+            Count = 0;
+            Count = repo.Count("MEMBER");
             member.MemberID = CreateID("MEMBER");
             member.UserName = xUserName.Text;
             member.Password = xPassword.Text;
             member.Age = xAge.Text;
             member.Gender = xGender.Text;
             member.JoinDate = Convert.ToDateTime(xJoiningdate.Text);
+            member.ActiveStatus = true;
 
             repo.InsertMemberDetails(member);
-
             MessageBox.Show("Successfully Added");
+            xUserName.Text = null;
+            xPassword.Text = null;
+            xAge.Text = null;
+            xGender.Text = null;
+
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -112,6 +133,8 @@ namespace LibraryManagementSystem
         private void xMemberremove_Click(object sender, RoutedEventArgs e)
         {
             repo.RemoveMember(xmemberID.Text);
+            MessageBox.Show("Removed");
+            xmemberID.Text = null;
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)

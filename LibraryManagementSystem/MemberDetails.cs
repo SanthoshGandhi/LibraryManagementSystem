@@ -14,5 +14,6 @@ namespace LibraryManagementSystem
         public string Age { get; set; }
         public string Gender { get; set; }
         public DateTime JoinDate { get; set; }
+        public bool ActiveStatus { get; set; }
     }
 }
