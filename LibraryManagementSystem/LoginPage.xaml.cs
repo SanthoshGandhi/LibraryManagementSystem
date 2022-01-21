@@ -31,6 +31,7 @@ namespace LibraryManagementSystem
         {
             Repo repo = new Repo();
             List<LoginModel> logins = repo.GetLoginDetails(Log_as);
+            bool flag = false;
             foreach(LoginModel item in logins)
             {
                 if(xUsername.Text == item.Username && xPassword.Text == item.Password)
@@ -38,16 +39,20 @@ namespace LibraryManagementSystem
                     if(Log_as == "ADMIN")
                     {
                         this.NavigationService.Navigate(new AdminPage());
+                        flag = true;
+                        return;
                     }
                     else if(Log_as == "MEMBER")
                     {
                         this.NavigationService.Navigate(new MemberPage());
+                        flag = true;
+                        return;
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Please enter the valid Username or Password");
-                }
+            }
+            if (flag)
+            {
+                MessageBox.Show("Please enter the valid Username or Password");
             }
         }
 

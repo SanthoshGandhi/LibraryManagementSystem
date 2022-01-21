@@ -42,18 +42,7 @@ namespace LibraryManagementSystem
             con.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.CommandText = "Insert Into BookDetails(ID,Title,Description,AuthorName,PublicationYear,Edition,Price,Count,EntryDate) values(@ID,@Title,@Description,@Authorname,@Publication,@edition,@price,@Count,@EntryDate)";
-            //foreach (BookDetails item in books)
-            //{
-            //    cmd.Parameters.AddWithValue("@ID", item.BookID);
-            //    cmd.Parameters.AddWithValue("@Title", item.BookTitle);
-            //    cmd.Parameters.AddWithValue("@Description", item.Description);
-            //    cmd.Parameters.AddWithValue("@Authorname", item.AuthorName);
-            //    cmd.Parameters.AddWithValue("@Publication", item.PublicationYear);
-            //    cmd.Parameters.AddWithValue("@edition", item.Edition);
-            //    cmd.Parameters.AddWithValue("@price", item.BookPrice);
-            //    cmd.Parameters.AddWithValue("@Count", item.BookCount);
-            //    cmd.Parameters.AddWithValue("@EntryDate", item.EntrtDate);
+            cmd.CommandText = "Insert Into BookDetails(ID,Title,Description,AuthorName,PublicationYear,Edition,Price,Count,EntryDate,Active) values(@ID,@Title,@Description,@Authorname,@Publication,@edition,@price,@Count,@EntryDate,@Active)";
 
             cmd.Parameters.AddWithValue("@ID", books.BookID);
             cmd.Parameters.AddWithValue("@Title", books.BookTitle);
@@ -63,21 +52,12 @@ namespace LibraryManagementSystem
             cmd.Parameters.AddWithValue("@edition", books.Edition);
             cmd.Parameters.AddWithValue("@price", books.BookPrice);
             cmd.Parameters.AddWithValue("@Count", books.BookCount);
-            cmd.Parameters.AddWithValue("@EntryDate", books.EntrtDate);
+            cmd.Parameters.AddWithValue("@EntryDate", books.EntryDate);
 
-
-            //cmd.Parameters[0].Value = ;
-            //cmd.Parameters[1].Value = ;
-            //cmd.Parameters[2].Value = ;
-            //cmd.Parameters[3].Value = ;
-            //cmd.Parameters[4].Value = ;
-            //cmd.Parameters[5].Value = ;
-            //cmd.Parameters[6].Value = ;
-            //cmd.Parameters[7].Value = ;
-            //cmd.Parameters[8].Value = ;
+            int val = books.ActiveStatus ? 1 : 0;
+            cmd.Parameters.AddWithValue("@Active", books.ActiveStatus);
 
             cmd.ExecuteNonQuery();
-            // }
             con.Close();
         }
 
@@ -109,7 +89,7 @@ namespace LibraryManagementSystem
             con.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.CommandText = "Delete from BookDetails where id = '" + id + "'";
+            cmd.CommandText = "Update BookDetails set Active = '0' where id = '" + id + "'";
             cmd.ExecuteNonQuery();
             con.Close();
         }
@@ -147,9 +127,9 @@ namespace LibraryManagementSystem
             cmd.Connection = con;
             cmd.CommandText = "Select * from BookDetails";
             SqlDataReader reader = cmd.ExecuteReader();
-            while(reader.Read())
+            while (reader.Read())
             {
-                books.Add(new BookDetails { BookID = reader.GetString(0), BookTitle = reader.GetString(1), Description = reader.GetString(2), AuthorName = reader.GetString(3), PublicationYear = reader.GetString(4), Edition = reader.GetString(5), BookPrice = reader.GetString(6), BookCount = reader.GetString(7), EntrtDate = reader.GetDateTime(8) });
+                books.Add(new BookDetails { BookID = reader.GetString(0), BookTitle = reader.GetString(1), Description = reader.GetString(2), AuthorName = reader.GetString(3), PublicationYear = reader.GetInt32(4), Edition = reader.GetString(5), BookPrice = reader.GetInt32(6), BookCount = reader.GetInt32(7), EntryDate = reader.GetDateTime(8) ,ActiveStatus = reader.GetBoolean(9)});
             }
 
             con.Close();
@@ -189,10 +169,10 @@ namespace LibraryManagementSystem
                 book.BookTitle = reader.GetString(1);
                 book.Description = reader.GetString(2);
                 book.AuthorName = reader.GetString(3);
-                book.PublicationYear = reader.GetString(4);
+                book.PublicationYear = reader.GetInt32(4);
                 book.Edition = reader.GetString(5);
-                book.BookPrice = reader.GetString(6);
-                book.BookCount = reader.GetString(7);
+                book.BookPrice = reader.GetInt32(6);
+                book.BookCount = reader.GetInt32(7);
             }
             con.Close();
             return book;

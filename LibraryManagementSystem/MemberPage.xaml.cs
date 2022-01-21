@@ -42,10 +42,10 @@ namespace LibraryManagementSystem
                 xBookTitle.Text = book.BookTitle;
                 xDescription.Text = book.Description;
                 xAuthorname.Text = book.AuthorName;
-                xPublicationdate.Text = book.PublicationYear;
+                xPublicationdate.Text = book.PublicationYear.ToString();
                 xEdition.Text = book.Edition;
-                xPrice.Text = book.BookPrice;
-                xBookCount.Text = book.BookCount;
+                xPrice.Text = book.BookPrice.ToString();
+                xBookCount.Text = book.BookCount.ToString();
                 xAddnewbook.Visibility = Visibility.Visible;
                 xIssuebtn.Visibility = Visibility.Visible;
                 xReturnbtn.Visibility = Visibility.Visible;

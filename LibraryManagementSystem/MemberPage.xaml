@@ -60,7 +60,7 @@
         <Border x:Name="xIssueborder" Width="400" Height="150" BorderThickness="2" BorderBrush="Gray" CornerRadius="5" Visibility="Collapsed">
             <Grid>
                 <TextBlock Text="  Name" FontSize="20" Width="100" Height="30" HorizontalAlignment="Left" Margin="0,0,0,60"></TextBlock>
-                <TextBox x:Name="xName" Width="240" Height="30" Margin="90,0,0,60" BorderThickness="2"></TextBox>
+                <TextBox x:Name="xName" Width="240" Height="30" Margin="90,0,0,60" FontSize="20" BorderThickness="2"></TextBox>
                 <Button x:Name="xIssue" Width="100" Height="40" VerticalAlignment="Bottom" Margin="0,0,0,20" Content="Next" FontSize="20" FontWeight="SemiBold" Click="xIssue_Click"></Button>
             </Grid>
         </Border>
@@ -68,7 +68,7 @@
         <Border x:Name="xRreturnborder" Width="400" Height="150" BorderThickness="2" BorderBrush="Gray" CornerRadius="5" Visibility="Collapsed">
             <Grid>
                 <TextBlock Text="  Name" FontSize="20" Width="100" Height="30" HorizontalAlignment="Left" Margin="0,0,0,60"></TextBlock>
-                <TextBox x:Name="xReturnName" Width="240" Height="30" Margin="90,0,0,60" BorderThickness="2"></TextBox>
+                <TextBox x:Name="xReturnName" Width="240" Height="30" Margin="90,0,0,60" FontSize="20" BorderThickness="2"></TextBox>
                 <Button x:Name="xBookReturn" Width="100" Height="40" VerticalAlignment="Bottom" Margin="0,0,0,20" Content="Next" FontSize="20" FontWeight="SemiBold" Click="xBookReturn_Click"></Button>
             </Grid>
         </Border>

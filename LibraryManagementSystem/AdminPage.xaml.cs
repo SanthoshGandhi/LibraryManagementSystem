@@ -34,16 +34,13 @@ namespace LibraryManagementSystem
             BookDetails book = new BookDetails();
             Count = repo.Count("BOOK");
             string id = CreateID("BOOK");
-            //Books.Add(new BookDetails { BookID = id, BookTitle = xBookTitle.Text, Description = xDescription.Text, AuthorName = xAuthorname.Text, PublicationYear = xPublicationdate.Text,Edition = xEdition.Text , BookPrice = xPrice.Text,BookCount = xBookCount.Text , EntrtDate =DateTime.Today.Date});
-            book = new BookDetails { BookID = id, BookTitle = xBookTitle.Text, Description = xDescription.Text, AuthorName = xAuthorname.Text, PublicationYear = xPublicationdate.Text, Edition = xEdition.Text, BookPrice = xPrice.Text, BookCount = xBookCount.Text, EntrtDate = DateTime.Today.Date };
+            book = new BookDetails { BookID = id, BookTitle = xBookTitle.Text, Description = xDescription.Text, AuthorName = xAuthorname.Text, PublicationYear = Convert.ToInt32(xPublicationdate.Text), Edition = xEdition.Text, BookPrice = Convert.ToInt32(xPrice.Text), BookCount = Convert.ToInt32(xBookCount.Text), EntryDate = DateTime.Today.Date,ActiveStatus = true };
+
             repo.InsertBookDetails(book);
         }
 
         private void xinsertbooks_Click(object sender, RoutedEventArgs e)
         {
-            //repo.InsertBookDetails(Books);
-            MessageBox.Show("Successfull");
-            Books = new List<BookDetails>();
         }
 
         public string CreateID(string IDFor)

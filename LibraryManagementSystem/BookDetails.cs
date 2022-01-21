@@ -12,10 +12,11 @@ namespace LibraryManagementSystem
         public string BookTitle { get; set; }
         public string Description { get; set; }
         public string AuthorName { get; set; }
-        public string PublicationYear { get; set; }
+        public int PublicationYear { get; set; }
         public string Edition { get; set; }
-        public string BookPrice { get; set; }
-        public string BookCount { get; set; }
-        public DateTime EntrtDate { get; set; }
+        public int BookPrice { get; set; }
+        public int BookCount { get; set; }
+        public DateTime EntryDate { get; set; }
+        public bool ActiveStatus { get; set; }
     }
 }
