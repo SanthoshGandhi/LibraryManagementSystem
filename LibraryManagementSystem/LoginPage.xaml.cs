@@ -44,13 +44,13 @@ namespace LibraryManagementSystem
                     }
                     else if(Log_as == "MEMBER")
                     {
-                        this.NavigationService.Navigate(new MemberPage());
+                        this.NavigationService.Navigate(new MemberPage(repo.GetMember(item.Username,item.Password)));
                         flag = true;
                         return;
                     }
                 }
             }
-            if (flag)
+            if (!flag)
             {
                 MessageBox.Show("Please enter the valid Username or Password");
             }

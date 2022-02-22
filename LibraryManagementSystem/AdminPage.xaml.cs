@@ -100,18 +100,17 @@ namespace LibraryManagementSystem
 
         private void xaddmember_Click(object sender, RoutedEventArgs e)
         {
-            MemberDetails member = new MemberDetails();
             Count = 0;
             Count = repo.Count("MEMBER");
-            member.MemberID = CreateID("MEMBER");
-            member.UserName = xUserName.Text;
-            member.Password = xPassword.Text;
-            member.Age = xAge.Text;
-            member.Gender = xGender.Text;
-            member.JoinDate = Convert.ToDateTime(xJoiningdate.Text);
-            member.ActiveStatus = true;
+            MemberDetails member = new MemberDetails(CreateID("MEMBER"), xUserName.Text, xAge.Text, xGender.Text, Convert.ToDateTime(xJoiningdate.Text));
+            
+            //member.MemberID = CreateID("MEMBER");
+            //member.UserName = xUserName.Text;
+            //member.Age = xAge.Text;
+            //member.Gender = xGender.Text;
+            //member.JoinDate = Convert.ToDateTime(xJoiningdate.Text);
 
-            repo.InsertMemberDetails(member);
+            repo.InsertMemberDetails(member,xPassword.Text);
             MessageBox.Show("Successfully Added");
             xUserName.Text = null;
             xPassword.Text = null;
@@ -176,6 +175,11 @@ namespace LibraryManagementSystem
             List<MemberDetails> details = repo.GetMemberDetails();
 
             xMemberdetails.ItemsSource = details;
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new LoginPage());
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace LibraryManagementSystem
 {
     class Repo
     {
-        static string connectionstring = "Data Source=.;Initial Catalog=LMSystem;Integrated Security=True";
+        public string connectionstring = "Data Source=.;Initial Catalog=LMSystem;Integrated Security=True";
 
         public List<LoginModel> GetLoginDetails(string Log_as)
         {
@@ -95,14 +96,13 @@ namespace LibraryManagementSystem
         }
 
 
-        public void InsertMemberDetails(MemberDetails details)
+        public void InsertMemberDetails(MemberDetails details,string pass)
         {
             SqlConnection con = new SqlConnection(connectionstring);
             con.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            int val = details.ActiveStatus ? 1 : 0;
-            cmd.CommandText = "Insert into MemberDetails values ('" + details.MemberID + "','" + details.UserName + "','" + details.Password + "','" + details.Age + "','" + details.Gender + "','" + details.JoinDate + "','" + val + "')";
+            cmd.CommandText = "Insert into MemberDetails values ('" + details.MemberID + "','" + details.UserName + "','"+pass+"','" + details.Age + "','" + details.Gender + "','" + details.JoinDate + "','1')";
             cmd.ExecuteNonQuery();
             con.Close();
         }
@@ -149,20 +149,20 @@ namespace LibraryManagementSystem
             SqlDataReader reader = cmd.ExecuteReader();
             while(reader.Read())
             {
-                members.Add(new MemberDetails { MemberID = reader.GetString(0), UserName = reader.GetString(1), Password = reader.GetString(2), Age = reader.GetString(3), Gender = reader.GetString(4), JoinDate = reader.GetDateTime(5),ActiveStatus = reader.GetBoolean(6) });
+                members.Add( new MemberDetails (reader.GetString(0), reader.GetString(1),reader.GetString(3), reader.GetString(4), reader.GetDateTime(5) ));
             }
             con.Close();
             return members;
         }
 
-        public BookDetails GetBook(string id)
+        public BookDetails GetBook(string Name)
         {
             BookDetails book = new BookDetails();
             SqlConnection con = new SqlConnection(connectionstring);
             con.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.CommandText = "select * from BookDetails where Id ='" + id + "'";
+            cmd.CommandText = "select * from BookDetails where Title ='" + Name + "' and Active = '1'";
             SqlDataReader reader = cmd.ExecuteReader();
             while(reader.Read())
             {
@@ -181,13 +181,24 @@ namespace LibraryManagementSystem
 
         public void InsertIssusedDetails(BookIssueModel book)
         {
+            bool flag = false;
             SqlConnection con = new SqlConnection(connectionstring);
             con.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            int val = book.IsIssued ? 1 : 0;
-            cmd.CommandText = "Insert into BookIssuedTable values ('" + book.Name + "','" + book.BookID + "','" + val + "','" + book.IssuedDate.ToString("yyyy-MM-dd") + "')";
-            cmd.ExecuteNonQuery();
+            cmd.CommandText = "SELECT CAST(CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END AS BIT) FROM BookIssuedTable WHERE BookId = '" + book.BookID + "' and MemberID = '"+book.MemberID+"'";
+            flag = (bool)cmd.ExecuteScalar();
+            if(flag)
+            {
+               cmd.CommandText = "Update BookIssuedTable set IsIssued = '1' where BookId = '"+book.BookID+"'";
+                cmd.ExecuteNonQuery();
+            }
+            else
+            {
+                int val = book.IsIssued ? 1 : 0;
+                cmd.CommandText = "Insert into BookIssuedTable values ('" + book.MemberID + "','" + book.BookID + "','" + val + "','" + book.IssuedDate.ToString("yyyy-MM-dd") + "','" + book.ReturnDate.ToString("yyyy-MM-dd") + "')";
+                cmd.ExecuteNonQuery();
+            }
             con.Close();
         }
 
@@ -197,21 +208,57 @@ namespace LibraryManagementSystem
             con.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.CommandText = "Select Count(Customer) from BookIssuedTable where IsIssued = 1 and Customer = '"+name+"'";
+            cmd.CommandText = "Select Count(MemberID) from BookIssuedTable where IsIssued = 1 and MemberID = '" + name +"'";
             int count = (int)cmd.ExecuteScalar();
             con.Close();
             return count;
         }
 
-        public void UpdateIssuedBooks(string bookid , string name)
+        public void UpdateIssuedBooks(string Memberid , string bookid)
         {
             SqlConnection con = new SqlConnection(connectionstring);
             con.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.CommandText = "update BookIssuedTable set IsIssued = '0' where Customer = '" + name + "' and BookID = '" + bookid + "'";
+            cmd.CommandText = "update BookIssuedTable set IsIssued = '0' where MemberID = '" + Memberid + "' and BookID = '" + bookid + "'";
             cmd.ExecuteNonQuery();
             con.Close();
+        }
+
+        public ObservableCollection<BookIssueModel> getissuedbooks()
+        {
+            ObservableCollection<BookIssueModel> issuebooks = new ObservableCollection<BookIssueModel>();
+            SqlConnection con = new SqlConnection(connectionstring);
+            con.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = "Select * from BookIssuedTable where IsIssued = '1'";
+            SqlDataReader reader = cmd.ExecuteReader();
+            while(reader.Read())
+            {
+                issuebooks.Add(new BookIssueModel(reader.GetString(0), reader.GetString(1), reader.GetBoolean(2),reader.GetDateTime(3),reader.GetDateTime(4)));
+            }
+            con.Close();
+            return issuebooks;
+        }
+
+
+        public MemberDetails GetMember(string name , string pass)
+        {
+            MemberDetails member = new MemberDetails();
+            SqlConnection con = new SqlConnection(connectionstring);
+            con.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = "Select * from MemberDetails where Username = '" + name + "' and Password ='" + pass + "'";
+            SqlDataReader reader = cmd.ExecuteReader();
+            while(reader.Read())
+            {
+                member = new MemberDetails(reader.GetString(0), reader.GetString(1), reader.GetString(3), reader.GetString(4), reader.GetDateTime(5));
+
+            }
+            con.Close();
+            return member;
         }
     }
 }

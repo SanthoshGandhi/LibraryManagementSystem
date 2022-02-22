@@ -58,9 +58,10 @@
     <Compile Include="AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BookDetails.cs" />
-    <Compile Include="BookIssueModel.cs" />
-    <Compile Include="LoginModel.cs" />
+    <Compile Include="Convertor\ColorConvertor.cs" />
+    <Compile Include="Model\BookDetails.cs" />
+    <Compile Include="Model\BookIssueModel.cs" />
+    <Compile Include="Model\LoginModel.cs" />
     <Compile Include="MemberPage.xaml.cs">
       <DependentUpon>MemberPage.xaml</DependentUpon>
     </Compile>
@@ -94,7 +95,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MemberDetails.cs" />
+    <Compile Include="Model\MemberDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

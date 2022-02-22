@@ -4,74 +4,102 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LibraryManagementSystem"
+      xmlns:Convert ="clr-namespace:LibraryManagementSystem.Convertor"
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="1366" Background="White"
       Title="MemberPage">
+    <Page.Resources>
+        <Convert:BrushConverter x:Key="ReturnDateConvert"></Convert:BrushConverter>
+    </Page.Resources>
 
     <Grid>
-        <StackPanel Orientation="Horizontal" Height="80" VerticalAlignment="Top" Margin="0,20,0,0">
-            <Border Width="300" Height="50" Margin="20,0,0,0" BorderThickness="2" BorderBrush="Gray" CornerRadius="5">
+        <StackPanel Orientation="Vertical" Height="80" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0">
+            <Border Width="300" Height="50" Margin="20,10,0,0" BorderThickness="2" BorderBrush="Gray" CornerRadius="5">
                 <StackPanel Orientation="Horizontal">
-                    <TextBox x:Name="xSearchbookid" Text="Enter Book ID" Width="250" BorderThickness="0" Height="30" FontSize="20"></TextBox>
+                    <TextBox x:Name="xSearchbookid" Text="Enter Book Name" Width="250" BorderThickness="0" Height="30" FontSize="20"></TextBox>
                     <Button x:Name="Searchbtn" Width="40" Height="40" Margin="3,0,0,0" Click="Searchbtn_Click"></Button>
                 </StackPanel>
+
             </Border>
-            <Button x:Name="xIssuebtn" Width="200" Height="50" Margin="100,0,0,0" Content="Issue Book" FontSize="22" FontWeight="SemiBold" Click="xIssuebtn_Click" Visibility="Collapsed"></Button>
-            <Button x:Name="xReturnbtn" Width="200" Height="50" Margin="100,0,0,0" Content="Return Book" Visibility="Collapsed" FontSize="22" FontWeight="SemiBold" Click="xReturnbtn_Click" ></Button>
+
+
         </StackPanel>
-        <Grid x:Name="xAddnewbook" Grid.Column="1" Visibility="Collapsed" Margin="0,130,0,0">
-            <Border Grid.Column="1" Height="430" Width="870" Margin="0,0,0,0" BorderThickness="2" BorderBrush="Gray" CornerRadius="5">
-                <Grid >
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition Height="2*"></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Text=" Book Title" Height="30" FontSize="20" ></TextBlock>
-                    <TextBox x:Name="xBookid" Grid.Row="0" Grid.Column="1" Height="40" Width="600" FontSize="20" BorderThickness="2" HorizontalAlignment="Left"></TextBox>
-                    <TextBlock Grid.Row="1" Text=" Book Title" Height="30" FontSize="20" ></TextBlock>
-                    <TextBox x:Name="xBookTitle" Grid.Row="1" Grid.Column="1" Height="40" Width="600" FontSize="20" BorderThickness="2" HorizontalAlignment="Left"></TextBox>
-                    <TextBlock Grid.Row="2" Text=" Book Description" Height="30" FontSize="20" ></TextBlock>
-                    <TextBox x:Name="xDescription" Grid.Row="2" Grid.Column="1" Height="90" Width="600" FontSize="20" BorderThickness="2" HorizontalAlignment="Left"></TextBox>
-                    <TextBlock Grid.Row="3" Text=" Author Name" Height="30" FontSize="20" ></TextBlock>
-                    <TextBox x:Name="xAuthorname" Grid.Row="3" Grid.Column="1" Height="40" Width="600" FontSize="20" BorderThickness="2" HorizontalAlignment="Left"></TextBox>
-                    <TextBlock Grid.Row="4" Text=" Publication Year" Height="30" FontSize="20" ></TextBlock>
-                    <TextBox x:Name="xPublicationdate" Grid.Row="4" Grid.Column="1" Height="40" Width="200" FontSize="20" BorderThickness="2" HorizontalAlignment="Left"></TextBox>
-                    <TextBlock Grid.Row="5" Text=" Book Edition" Height="30" FontSize="20" ></TextBlock>
-                    <TextBox x:Name="xEdition" Grid.Row="5" Grid.Column="1" Height="40" Width="600" FontSize="20" BorderThickness="2" HorizontalAlignment="Left"></TextBox>
-                    <TextBlock Grid.Row="6" Text=" Book Price" Height="30" FontSize="20" ></TextBlock>
-                    <TextBox x:Name="xPrice" Grid.Row="6" Grid.Column="1" Height="40" Width="200" FontSize="20" BorderThickness="2" HorizontalAlignment="Left"></TextBox>
-                    <TextBlock Grid.Row="7" Text=" Book Count" Height="30" FontSize="20" ></TextBlock>
-                    <TextBox x:Name="xBookCount" Grid.Row="7" Grid.Column="1" Height="40" Width="100" FontSize="20" BorderThickness="2" HorizontalAlignment="Left"></TextBox>
-                </Grid>
-            </Border>
-            
-        </Grid>
 
-        <Border x:Name="xIssueborder" Width="400" Height="150" BorderThickness="2" BorderBrush="Gray" CornerRadius="5" Visibility="Collapsed">
-            <Grid>
-                <TextBlock Text="  Name" FontSize="20" Width="100" Height="30" HorizontalAlignment="Left" Margin="0,0,0,60"></TextBlock>
-                <TextBox x:Name="xName" Width="240" Height="30" Margin="90,0,0,60" FontSize="20" BorderThickness="2"></TextBox>
-                <Button x:Name="xIssue" Width="100" Height="40" VerticalAlignment="Bottom" Margin="0,0,0,20" Content="Next" FontSize="20" FontWeight="SemiBold" Click="xIssue_Click"></Button>
+        <Border x:Name="xAddnewbook" Grid.Column="1" Height="430" Width="570" Margin="0,100,0,100" HorizontalAlignment="Center" BorderThickness="2" BorderBrush="Gray" CornerRadius="5" Visibility="Collapsed">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Text=" Book ID" Height="30" FontSize="20" ></TextBlock>
+                <TextBox x:Name="xBookid" Grid.Row="0" Grid.Column="1" Height="40" Width="300" FontSize="20" BorderThickness="2" HorizontalAlignment="Left" IsReadOnly="True"></TextBox>
+                <TextBlock Grid.Row="1" Text=" Book Title" Height="30" FontSize="20" ></TextBlock>
+                <TextBox x:Name="xBookTitle" IsReadOnly="True" Grid.Row="1" Grid.Column="1" Height="40" Width="300" FontSize="20" BorderThickness="2" HorizontalAlignment="Left"></TextBox>
+                <TextBlock Grid.Row="2" Text=" Book Description"  Height="30" FontSize="20" ></TextBlock>
+                <TextBox x:Name="xDescription" Grid.Row="2" IsReadOnly="True" Grid.Column="1" Height="90" Width="300" FontSize="20" BorderThickness="2" HorizontalAlignment="Left"></TextBox>
+                <TextBlock Grid.Row="3" Text=" Author Name" Height="30" FontSize="20" ></TextBlock>
+                <TextBox x:Name="xAuthorname" Grid.Row="3" IsReadOnly="True" Grid.Column="1" Height="40" Width="300" FontSize="20" BorderThickness="2" HorizontalAlignment="Left"></TextBox>
+                <TextBlock Grid.Row="4" Text=" Publication Year" Height="30" FontSize="20" ></TextBlock>
+                <TextBox x:Name="xPublicationdate" Grid.Row="4" IsReadOnly="True" Grid.Column="1" Height="40" Width="200" FontSize="20" BorderThickness="2" HorizontalAlignment="Left"></TextBox>
+                <TextBlock Grid.Row="5" Text=" Book Edition" Height="30" FontSize="20" ></TextBlock>
+                <TextBox x:Name="xEdition" Grid.Row="5" Grid.Column="1" IsReadOnly="True" Height="40" Width="300" FontSize="20" BorderThickness="2" HorizontalAlignment="Left"></TextBox>
+                <TextBlock Grid.Row="6" Text=" Book Price" Height="30" FontSize="20" ></TextBlock>
+                <TextBox x:Name="xPrice" Grid.Row="6" Grid.Column="1" IsReadOnly="True" Height="40" Width="300" FontSize="20" BorderThickness="2" HorizontalAlignment="Left"></TextBox>
+                <TextBlock Grid.Row="7" Text=" Book Count" Height="30" FontSize="20" ></TextBlock>
+                <TextBox x:Name="xBookCount" Grid.Row="7" Grid.Column="1" Height="40" IsReadOnly="True" Width="100" FontSize="20" BorderThickness="2" HorizontalAlignment="Left"></TextBox>
             </Grid>
         </Border>
+        <Button x:Name="xselectedAddbtn" Width="150" Height="50" Content="ADD" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Bottom" Margin="0,0,0,50" Click="xselectedAddbtn_Click" Visibility="Collapsed"></Button>
 
-        <Border x:Name="xRreturnborder" Width="400" Height="150" BorderThickness="2" BorderBrush="Gray" CornerRadius="5" Visibility="Collapsed">
+        <DataGrid x:Name="xSelectedbooksView" Width="350" Height="350" HorizontalAlignment="Right" FontSize="16" Margin="0,0,20,70" AutoGenerateColumns="False" CanUserAddRows="False" Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Book ID" Width="Auto" Binding="{Binding BookID}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Book Name" Width="Auto" Binding="{Binding BookTitle}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="xIssuebtn" Width="120" Height="40" Margin="0,0,130,130" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="Issue Book" FontSize="22" Click="xIssue_Click" Visibility="Collapsed"></Button>
+
+        <Button Width="100" Height="30" Content="Home" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,5,25,0" Click="Button_Click_6"></Button>
+        <Border Width="350" Height="300" Margin="10,0,0,130" HorizontalAlignment="Left" BorderThickness="2" BorderBrush="Gray">
             <Grid>
-                <TextBlock Text="  Name" FontSize="20" Width="100" Height="30" HorizontalAlignment="Left" Margin="0,0,0,60"></TextBlock>
-                <TextBox x:Name="xReturnName" Width="240" Height="30" Margin="90,0,0,60" FontSize="20" BorderThickness="2"></TextBox>
-                <Button x:Name="xBookReturn" Width="100" Height="40" VerticalAlignment="Bottom" Margin="0,0,0,20" Content="Next" FontSize="20" FontWeight="SemiBold" Click="xBookReturn_Click"></Button>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" Height="25" VerticalAlignment="Top">
+                        <TextBox Width="143" BorderThickness="0,0,1,1" Text="Book" FontSize="16" ></TextBox>
+                        <TextBox Width="108" BorderThickness="0,0,1,1" Text="Issued Date" FontSize="16" ></TextBox>
+                        <TextBox Width="95" BorderThickness="0,0,0,1" Text="Return Date" FontSize="16" ></TextBox>
+                    </StackPanel>
+                    <ListView Width="345"  BorderThickness="0" x:Name="xIssuedBookList" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="xIssuedBookList_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="1" BorderBrush="Gray">
+                                    <Grid Width="335">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="125*"></ColumnDefinition>
+                                            <ColumnDefinition Width="100*"></ColumnDefinition>
+                                            <ColumnDefinition Width="85*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Grid.Column="0" FontSize="16" BorderThickness="0,0,1,1" Text="{Binding BookID}"></TextBox>
+                                        <TextBox Grid.Column="1" FontSize="16" BorderThickness="0,0,1,1" Text="{Binding IssuedDate,StringFormat={}dd-MM-yyyy}"></TextBox>
+                                        <TextBox Grid.Column="2" FontSize="16" Foreground="{Binding Converter={StaticResource ReturnDateConvert}}" BorderThickness="0,0,0,1" Text="{Binding ReturnDate,StringFormat={}dd-MM-yyyy}"></TextBox>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                </StackPanel>
             </Grid>
         </Border>
-
+        <Button x:Name="xReturnbtn" Width="150" Height="40" Margin="100,0,0,150" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Return Book" Visibility="Visible" FontSize="22"  Click="xReturnbtn_Click" ></Button>
     </Grid>
 </Page>
