@@ -17,6 +17,5 @@ namespace LibraryManagementSystem
         public int BookPrice { get; set; }
         public int BookCount { get; set; }
         public DateTime EntryDate { get; set; }
-        public bool ActiveStatus { get; set; }
     }
 }

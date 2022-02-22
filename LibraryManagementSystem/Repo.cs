@@ -41,7 +41,7 @@ namespace LibraryManagementSystem
             con.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.CommandText = "Insert Into BookDetails(ID,Title,Description,AuthorName,PublicationYear,Edition,Price,Count,EntryDate,Active) values(@ID,@Title,@Description,@Authorname,@Publication,@edition,@price,@Count,@EntryDate,@Active)";
+            cmd.CommandText = "Insert Into BookDetails(ID,Title,Description,AuthorName,PublicationYear,Edition,Price,Count,EntryDate,Active) values(@ID,@Title,@Description,@Authorname,@Publication,@edition,@price,@Count,@EntryDate,'1')";
 
             cmd.Parameters.AddWithValue("@ID", books.BookID);
             cmd.Parameters.AddWithValue("@Title", books.BookTitle);
@@ -52,9 +52,6 @@ namespace LibraryManagementSystem
             cmd.Parameters.AddWithValue("@price", books.BookPrice);
             cmd.Parameters.AddWithValue("@Count", books.BookCount);
             cmd.Parameters.AddWithValue("@EntryDate", books.EntryDate);
-
-            int val = books.ActiveStatus ? 1 : 0;
-            cmd.Parameters.AddWithValue("@Active", books.ActiveStatus);
 
             cmd.ExecuteNonQuery();
             con.Close();
@@ -128,7 +125,7 @@ namespace LibraryManagementSystem
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                books.Add(new BookDetails { BookID = reader.GetString(0), BookTitle = reader.GetString(1), Description = reader.GetString(2), AuthorName = reader.GetString(3), PublicationYear = reader.GetInt32(4), Edition = reader.GetString(5), BookPrice = reader.GetInt32(6), BookCount = reader.GetInt32(7), EntryDate = reader.GetDateTime(8) ,ActiveStatus = reader.GetBoolean(9)});
+                books.Add(new BookDetails { BookID = reader.GetString(0), BookTitle = reader.GetString(1), Description = reader.GetString(2), AuthorName = reader.GetString(3), PublicationYear = reader.GetInt32(4), Edition = reader.GetString(5), BookPrice = reader.GetInt32(6), BookCount = reader.GetInt32(7), EntryDate = reader.GetDateTime(8)});
             }
 
             con.Close();
