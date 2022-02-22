@@ -44,6 +44,10 @@ namespace LibraryManagementSystem
                     this.NavigationService.Navigate(new MemberPage(repo.GetMember(logins.Username, logins.Password)));
                 }
             }
+            else
+            {
+                MessageBox.Show("Please enter the valid UserName or Password");
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

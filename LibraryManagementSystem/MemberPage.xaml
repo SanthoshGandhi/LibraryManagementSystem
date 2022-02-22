@@ -17,7 +17,15 @@
             <Border Width="300" Height="50" Margin="20,10,0,0" BorderThickness="2" BorderBrush="Gray" CornerRadius="5">
                 <StackPanel Orientation="Horizontal">
                     <TextBox x:Name="xSearchbookid" Text="Enter Book Name" Width="250" BorderThickness="0" Height="30" FontSize="20"></TextBox>
-                    <Button x:Name="Searchbtn" Width="40" Height="40" Margin="3,0,0,0" Click="Searchbtn_Click"></Button>
+                    <Button x:Name="Searchbtn" Width="40" Height="40" Margin="3,0,0,0" Click="Searchbtn_Click">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Border Background="LightGray" BorderBrush="Black" BorderThickness="1" CornerRadius="5">
+                                    <Image Source="C:\Users\Santhosh Gandhi\source\repos\LibraryManagementSystem\LibraryManagementSystem\Icon\Search.png"></Image>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
                 </StackPanel>
 
             </Border>
@@ -69,7 +77,15 @@
         </DataGrid>
         <Button x:Name="xIssuebtn" Width="120" Height="40" Margin="0,0,130,130" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="Issue Book" FontSize="22" Click="xIssue_Click" Visibility="Collapsed"></Button>
 
-        <Button Width="100" Height="30" Content="Home" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,5,25,0" Click="Button_Click_6"></Button>
+        <Button Width="50" Height="40" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,5,25,0" Click="Button_Click_6">
+            <Button.Template>
+                <ControlTemplate>
+                    <Border Background="LightGray" BorderBrush="Black" BorderThickness="1" CornerRadius="5">
+                        <Image Source="C:\Users\Santhosh Gandhi\source\repos\LibraryManagementSystem\LibraryManagementSystem\Icon\Logout.png"></Image>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
         <Border Width="350" Height="300" Margin="10,0,0,130" HorizontalAlignment="Left" BorderThickness="2" BorderBrush="Gray">
             <Grid>
                 <StackPanel Orientation="Vertical">
