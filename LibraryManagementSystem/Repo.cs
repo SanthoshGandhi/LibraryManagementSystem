@@ -13,28 +13,26 @@ namespace LibraryManagementSystem
     {
         public string connectionstring = "Data Source=.;Initial Catalog=LMSystem;Integrated Security=True";
 
-        public List<LoginModel> GetLoginDetails(string Log_as)
+        public bool GetLoginDetails(string Log_as,LoginModel model)
         {
-            List<LoginModel> log = new List<LoginModel>();
+            bool flag = true;
             SqlConnection con = new SqlConnection(connectionstring);
             con.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
             if (Log_as == "ADMIN")
             {
-                cmd.CommandText = "Select * from Admin";
+                cmd.CommandText = "SELECT UserName FROM Admin WHERE username = '"+model.Username+"' AND password = '"+model.Password+"'";
             }
             else
             {
-                cmd.CommandText = "Select UserName,Password from MemberDetails";
+                cmd.CommandText = "SELECT UserName FROM MemberDetails WHERE username = '" + model.Username + "' AND password = '" + model.Password + "'";
             }
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            if(cmd.ExecuteScalar() == null)
             {
-                log.Add(new LoginModel { Username = reader.GetString(0), Password = reader.GetString(1) });
+                flag = false;
             }
-            con.Close();
-            return log;
+            return  flag;
         }
 
         public void InsertBookDetails(BookDetails books)

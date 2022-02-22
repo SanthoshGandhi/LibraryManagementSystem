@@ -30,29 +30,19 @@ namespace LibraryManagementSystem
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Repo repo = new Repo();
-            List<LoginModel> logins = repo.GetLoginDetails(Log_as);
-            bool flag = false;
-            foreach(LoginModel item in logins)
+            LoginModel logins = new LoginModel();
+            logins.Username = xUsername.Text;
+            logins.Password = xPassword.Password;
+            if (repo.GetLoginDetails(Log_as, logins))
             {
-                if(xUsername.Text == item.Username && xPassword.Text == item.Password)
+                if (Log_as == "ADMIN")
                 {
-                    if(Log_as == "ADMIN")
-                    {
-                        this.NavigationService.Navigate(new AdminPage());
-                        flag = true;
-                        return;
-                    }
-                    else if(Log_as == "MEMBER")
-                    {
-                        this.NavigationService.Navigate(new MemberPage(repo.GetMember(item.Username,item.Password)));
-                        flag = true;
-                        return;
-                    }
+                    this.NavigationService.Navigate(new AdminPage());
                 }
-            }
-            if (!flag)
-            {
-                MessageBox.Show("Please enter the valid Username or Password");
+                else if (Log_as == "MEMBER")
+                {
+                    this.NavigationService.Navigate(new MemberPage(repo.GetMember(logins.Username, logins.Password)));
+                }
             }
         }
 
