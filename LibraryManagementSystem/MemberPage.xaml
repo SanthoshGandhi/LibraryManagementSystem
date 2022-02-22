@@ -69,10 +69,10 @@
         </Border>
         <Button x:Name="xselectedAddbtn" Width="150" Height="50" Content="ADD" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Bottom" Margin="0,0,0,50" Click="xselectedAddbtn_Click" Visibility="Collapsed"></Button>
 
-        <DataGrid x:Name="xSelectedbooksView" Width="350" Height="350" HorizontalAlignment="Right" FontSize="16" Margin="0,0,20,70" AutoGenerateColumns="False" CanUserAddRows="False" Visibility="Collapsed">
+        <DataGrid x:Name="xSelectedbooksView" Width="350" Height="350" HorizontalAlignment="Right" FontSize="16" Margin="0,0,20,70" AutoGenerateColumns="False" CanUserAddRows="False" Visibility="Collapsed" SelectionChanged="xSelectedbooksView_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Book ID" Width="Auto" Binding="{Binding BookID}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Book Name" Width="Auto" Binding="{Binding BookTitle}"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Header="Book ID" Width="Auto" Binding="{Binding BookID}"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Header="Book Name" Width="Auto" Binding="{Binding BookTitle}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="xIssuebtn" Width="120" Height="40" Margin="0,0,130,130" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="Issue Book" FontSize="22" Click="xIssue_Click" Visibility="Collapsed"></Button>
@@ -90,9 +90,9 @@
             <Grid>
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal" Height="25" VerticalAlignment="Top">
-                        <TextBox Width="143" BorderThickness="0,0,1,1" Text="Book" FontSize="16" ></TextBox>
-                        <TextBox Width="108" BorderThickness="0,0,1,1" Text="Issued Date" FontSize="16" ></TextBox>
-                        <TextBox Width="95" BorderThickness="0,0,0,1" Text="Return Date" FontSize="16" ></TextBox>
+                        <TextBox Width="143" BorderThickness="0,0,1,1" Text="Book" FontSize="16" IsReadOnly="True"></TextBox>
+                        <TextBox Width="108" BorderThickness="0,0,1,1" Text="Issued Date" FontSize="16" IsReadOnly="True" ></TextBox>
+                        <TextBox Width="95" BorderThickness="0,0,0,1" Text="Return Date" FontSize="16" IsReadOnly="True" ></TextBox>
                     </StackPanel>
                     <ListView Width="345"  BorderThickness="0" x:Name="xIssuedBookList" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="xIssuedBookList_SelectionChanged">
                         <ListView.ItemTemplate>
@@ -104,9 +104,9 @@
                                             <ColumnDefinition Width="100*"></ColumnDefinition>
                                             <ColumnDefinition Width="85*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
-                                        <TextBox Grid.Column="0" FontSize="16" BorderThickness="0,0,1,1" Text="{Binding BookID}"></TextBox>
-                                        <TextBox Grid.Column="1" FontSize="16" BorderThickness="0,0,1,1" Text="{Binding IssuedDate,StringFormat={}dd-MM-yyyy}"></TextBox>
-                                        <TextBox Grid.Column="2" FontSize="16" Foreground="{Binding Converter={StaticResource ReturnDateConvert}}" BorderThickness="0,0,0,1" Text="{Binding ReturnDate,StringFormat={}dd-MM-yyyy}"></TextBox>
+                                        <TextBox Grid.Column="0" FontSize="16" BorderThickness="0,0,1,1" Text="{Binding BookID}" IsReadOnly="True"></TextBox>
+                                        <TextBox Grid.Column="1" FontSize="16" BorderThickness="0,0,1,1" Text="{Binding IssuedDate,StringFormat={}dd-MM-yyyy}" IsReadOnly="True"></TextBox>
+                                        <TextBox Grid.Column="2" FontSize="16" Foreground="{Binding Converter={StaticResource ReturnDateConvert}}" BorderThickness="0,0,0,1" Text="{Binding ReturnDate,StringFormat={}dd-MM-yyyy}" IsReadOnly="True"></TextBox>
                                     </Grid>
                                 </Border>
                             </DataTemplate>

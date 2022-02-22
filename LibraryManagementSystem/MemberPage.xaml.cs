@@ -72,8 +72,6 @@ namespace LibraryManagementSystem
                 xPrice.Text = book.BookPrice.ToString();
                 xBookCount.Text = book.BookCount.ToString();
                 xAddnewbook.Visibility = Visibility.Visible;
-                xIssuebtn.Visibility = Visibility.Visible;
-                xReturnbtn.Visibility = Visibility.Visible;
                 xselectedAddbtn.Visibility = Visibility.Visible;
                 xSelectedbooksView.Visibility = Visibility.Visible;
             }
@@ -133,6 +131,7 @@ namespace LibraryManagementSystem
                 {
                     SelectedBooks.Add(book);
                     xselectedAddbtn.Visibility = Visibility.Collapsed;
+                    xIssuebtn.Visibility = Visibility.Visible;
                 }
                 else
                 {
@@ -179,6 +178,18 @@ namespace LibraryManagementSystem
 
             Returnbook = Issuedbooks[Index];
 
+        }
+
+        private void xSelectedbooksView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (xSelectedbooksView.SelectedIndex != -1)
+            {
+                SelectedBooks.Remove(SelectedBooks[xSelectedbooksView.SelectedIndex]);
+            }
+            if(SelectedBooks.Count == 0)
+            {
+                xIssuebtn.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }
