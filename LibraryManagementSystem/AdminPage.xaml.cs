@@ -35,7 +35,7 @@ namespace LibraryManagementSystem
             Count = 0;
             Count = repo.Count("BOOK");
             string id = CreateID("BOOK");
-            book = new BookDetails { BookID = id, BookTitle = xBookTitle.Text, Description = xDescription.Text, AuthorName = xAuthorname.Text, PublicationYear = Convert.ToInt32(xPublicationdate.Text), Edition = xEdition.Text, BookPrice = Convert.ToInt32(xPrice.Text), BookCount = Convert.ToInt32(xBookCount.Text), EntryDate = DateTime.Today.Date,ActiveStatus = true };
+            book = new BookDetails { BookID = id, BookTitle = xBookTitle.Text, Description = xDescription.Text, AuthorName = xAuthorname.Text, PublicationYear = Convert.ToInt32(xPublicationdate.Text), Edition = xEdition.Text, BookPrice = Convert.ToInt32(xPrice.Text), BookCount = Convert.ToInt32(xBookCount.Text), EntryDate = DateTime.Today.Date };
 
 
             repo.InsertBookDetails(book);

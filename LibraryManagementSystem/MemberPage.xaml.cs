@@ -70,7 +70,17 @@ namespace LibraryManagementSystem
                 xPublicationdate.Text = book.PublicationYear.ToString();
                 xEdition.Text = book.Edition;
                 xPrice.Text = book.BookPrice.ToString();
-                xBookCount.Text = book.BookCount.ToString();
+                if (book.BookPrice > 0)
+                {
+                    xBookCount.Text = book.BookCount.ToString();
+                }
+                else
+                {
+                    xBookCount.Text = book.BookCount.ToString();
+                    xselectedAddbtn.Visibility = Visibility.Collapsed;
+                    return;
+                }
+                
                 xAddnewbook.Visibility = Visibility.Visible;
                 xselectedAddbtn.Visibility = Visibility.Visible;
                 xSelectedbooksView.Visibility = Visibility.Visible;
@@ -142,7 +152,6 @@ namespace LibraryManagementSystem
             {
                 xselectedAddbtn.Visibility = Visibility.Collapsed;
             }
-
         }
 
         BookIssueModel Returnbook = new BookIssueModel();
@@ -156,6 +165,7 @@ namespace LibraryManagementSystem
                 xIssuedBookList.Items.Add(item);
             }
             xAddnewbook.Visibility = Visibility.Collapsed;
+            xselectedAddbtn.Visibility = Visibility.Collapsed;
             MessageBox.Show("Returned");
         }
 

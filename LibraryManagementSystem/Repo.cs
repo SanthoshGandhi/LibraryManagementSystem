@@ -170,6 +170,12 @@ namespace LibraryManagementSystem
                 book.BookPrice = reader.GetInt32(6);
                 book.BookCount = reader.GetInt32(7);
             }
+            reader.Close();
+            cmd.Dispose();
+            cmd.CommandText = "Select count(BookID) from BookIssuedTable where BookID = '" + book.BookID + "'";
+            int count = (int)cmd.ExecuteScalar();
+            //book.BookCount = book.BookCount - count;
+            book.BookCount = 0;
             con.Close();
             return book;
         }
@@ -181,7 +187,7 @@ namespace LibraryManagementSystem
             con.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.CommandText = "SELECT CAST(CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END AS BIT) FROM BookIssuedTable WHERE BookId = '" + book.BookID + "' and MemberID = '"+book.MemberID+"'";
+            cmd.CommandText = "SELECT CAST(CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END AS BIT) FROM BookIssuedTable WHERE BookID = '" + book.BookID + "' and MemberID = '"+book.MemberID+"'";
             flag = (bool)cmd.ExecuteScalar();
             if(flag)
             {
